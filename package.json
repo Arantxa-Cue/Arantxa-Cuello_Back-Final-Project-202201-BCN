@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/isdi-coders-2022/Arantxa-Cuello_Back-Final-Project-202201-BCN/issues"
   },
-  "homepage": "https://github.com/isdi-coders-2022/Arantxa-Cuello_Back-Final-Project-202201-BCN#readme"
+  "homepage": "https://github.com/isdi-coders-2022/Arantxa-Cuello_Back-Final-Project-202201-BCN#readme",
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  }
 }
