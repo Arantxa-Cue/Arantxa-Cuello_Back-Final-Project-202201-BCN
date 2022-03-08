@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "start": "node src",
-    "test-watch": "jest --watchAll",
-    "coverage": "jest --coverage"
+    "test-coverage": "jest --watchAll --collect-coverage "
   },
   "repository": {
     "type": "git",
@@ -41,7 +40,7 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/index.js",
-      "!src/server/uppServer.js",
+      "!src/server/server.js",
       "!src/database/index.js",
       "!src/**/*.test.js",
       "!src/server/index.js"
