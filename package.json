@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src"
+    "test": "jest --passWithNoTests",
+    "start": "node src",
+    "test-watch": "jest --watchAll",
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,20 @@
     "eslint-plugin-import": "^2.25.4"
   },
   "dependencies": {
-    "build": "^0.1.4"
+    "@types/jest": "^27.4.1",
+    "build": "^0.1.4",
+    "debug": "^4.3.3",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/server/uppServer.js",
+      "!src/database/index.js",
+      "!src/**/*.test.js",
+      "!src/server/index.js"
+    ]
   }
 }
