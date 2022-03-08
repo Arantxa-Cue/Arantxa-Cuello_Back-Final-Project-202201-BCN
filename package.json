@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watchAll",
     "start": "node src",
-    "test-coverage": "jest --watchAll --coverage"
+    "test-coverage": "jest --watchAll --collect-coverage "
   },
   "repository": {
     "type": "git",
