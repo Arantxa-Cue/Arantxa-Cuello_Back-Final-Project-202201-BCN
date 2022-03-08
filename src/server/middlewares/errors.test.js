@@ -24,8 +24,8 @@ describe("Given a generalError middleware function", () => {
         json: jest.fn(),
       };
       const error = {
-        code: 403,
-        message: "Forbidden",
+        code: 500,
+        message: "Internal server error",
       };
       const expectedError = { error: true, message: error.message };
 
