@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --passWithNoTests",
+    "test": "jest --watchAll",
     "start": "node src",
-    "test-watch": "jest --watchAll",
-    "coverage": "jest --coverage"
+    "test-coverage": "jest --watchAll --coverage"
   },
   "repository": {
     "type": "git",
