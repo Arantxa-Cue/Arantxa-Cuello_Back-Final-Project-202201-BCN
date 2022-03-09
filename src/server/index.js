@@ -1,11 +1,18 @@
 const express = require("express");
 const morgan = require("morgan");
 const { default: helmet } = require("helmet");
+const router = require("./routers/sessionsRouter");
+const { notFoundError, generalError } = require("./middlewares/errors");
 
 const app = express();
 
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(helmet());
+
+app.use("/allsessions", router);
+
+app.use(notFoundError);
+app.use(generalError);
 
 module.exports = app;
