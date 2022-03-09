@@ -1,3 +1,4 @@
+require("dotenv").config();
 const debug = require("debug")("mindfulness:server");
 
 const mindServidor = (port, app) =>
