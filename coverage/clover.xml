@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646757162939" clover="3.2.0">
-  <project timestamp="1646757162939" name="All files">
+<coverage generated="1646839036148" clover="3.2.0">
+  <project timestamp="1646839036148" name="All files">
     <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2" elements="19" coveredelements="17" complexity="0" loc="13" ncloc="13" packages="1" files="1" classes="1"/>
     <file name="errors.js" path="C:\Users\cuelloar\OneDrive - Hewlett Packard Enterprise\Documents\Arantxa\Bootcamp 2022\mindfulness-back\src\server\middlewares\errors.js">
       <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
