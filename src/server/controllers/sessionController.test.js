@@ -27,25 +27,28 @@ describe("Given an getAllSessions controller", () => {
   });
 });
 describe("Given a deleteSession controller", () => {
-  describe("When it receives a response", () => {
-    test("Then it should return an object with the id of the removed session", async () => {
+  describe("When it receives a response with the if of an existing session", () => {
+    test("Then it should call method json with the removed session", async () => {
       const idRemovedSession = {
-        id: 22,
+        id: "22",
       };
 
       const res = {
+        status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
 
       const req = {
-        params: { id: 22 },
+        params: { id: "22" },
       };
+      const status = 200;
 
       Session.findByIdAndDelete = jest.fn().mockResolvedValue(idRemovedSession);
 
-      await deleteSession(req, res);
+      await deleteSession(req, res, null);
 
-      expect(res.json).toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(status);
+      expect(res.json).toHaveBeenCalledWith(idRemovedSession);
     });
   });
 });

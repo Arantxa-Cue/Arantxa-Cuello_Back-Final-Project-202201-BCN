@@ -17,6 +17,9 @@ const SessionSchema = new Schema({
     type: String,
     required: true,
   },
+  id: {
+    type: String,
+  },
 });
 
 const Session = model("Session", SessionSchema, "mindfulness");

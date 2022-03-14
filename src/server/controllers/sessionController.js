@@ -11,7 +11,7 @@ const deleteSession = async (req, res, next) => {
   try {
     const session = await Session.findByIdAndDelete(id);
     if (session) {
-      res.json({ robot: { id } });
+      res.status(200).json(session);
     } else {
       const error = new Error("Session not found");
       error.code = 404;
