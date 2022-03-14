@@ -6,4 +6,20 @@ const getAllSessions = async (req, res) => {
   res.json({ sessions });
 };
 
-module.exports = { getAllSessions };
+const deleteSession = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const session = await Session.findByIdAndDelete(id);
+    if (session) {
+      res.json({ robot: { id } });
+    } else {
+      const error = new Error("Session not found");
+      error.code = 404;
+      next(error);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllSessions, deleteSession };
