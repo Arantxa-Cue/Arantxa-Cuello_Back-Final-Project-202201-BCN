@@ -13,7 +13,7 @@ const SessionSchema = new Schema({
     type: String,
     required: true,
   },
-  audioUrl: {
+  iFrame: {
     type: String,
     required: true,
   },

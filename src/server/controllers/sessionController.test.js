@@ -1,5 +1,5 @@
 const Session = require("../../database/models/Session");
-const { getAllSessions } = require("./sessionController");
+const { getAllSessions, deleteSession } = require("./sessionController");
 
 jest.mock("../../database/models/Session");
 
@@ -23,6 +23,29 @@ describe("Given an getAllSessions controller", () => {
       await getAllSessions(null, res);
 
       expect(res.json).toHaveBeenCalledWith({ sessions });
+    });
+  });
+});
+describe("Given a deleteSession controller", () => {
+  describe("When it receives a response", () => {
+    test("Then it should return an object with the id of the removed session", async () => {
+      const idRemovedSession = {
+        id: 22,
+      };
+
+      const res = {
+        json: jest.fn(),
+      };
+
+      const req = {
+        params: { id: 22 },
+      };
+
+      Session.findByIdAndDelete = jest.fn().mockResolvedValue(idRemovedSession);
+
+      await deleteSession(req, res);
+
+      expect(res.json).toHaveBeenCalled();
     });
   });
 });

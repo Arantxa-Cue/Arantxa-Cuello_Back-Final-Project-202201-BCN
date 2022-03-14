@@ -22,13 +22,13 @@ beforeEach(async () => {
   await Session.create({
     title: "morning",
     comment: "hello",
-    audioUrl: "audiostring",
+    iFrame: "audiostring",
     _id: id,
   });
   await Session.create({
     title: "afternoon",
     comment: "hello",
-    audioUrl: "audiostring",
+    iFrame: "audiostring",
   });
 });
 
@@ -44,11 +44,20 @@ afterAll(() => {
 describe("Given an /allsessions/ endpoint", () => {
   describe("When it receives a GET request", () => {
     test("Then it should response with a 200 status code", async () => {
-      await request(app).get("/allsessions/").expect(200);
+      await request(app).get("/mindfulness/allsessions/").expect(200);
     });
     test("Then it should response with an array of two sessions", async () => {
-      const { body } = await request(app).get("/allsessions/").expect(200);
+      const { body } = await request(app)
+        .get("/mindfulness/allsessions/")
+        .expect(200);
       expect(body.sessions).toHaveLength(2);
+    });
+  });
+});
+describe("Given a /delete/:id endpoint", () => {
+  describe("When it receives a DELETE request", () => {
+    test("Then it should response a 200 code", async () => {
+      await request(app).delete(`/mindfulness/delete/${id}`).expect(200);
     });
   });
 });
