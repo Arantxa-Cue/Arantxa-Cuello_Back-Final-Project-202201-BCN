@@ -14,7 +14,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(helmet());
 
-app.use("/mindfulness", router);
+app.use("/", router);
 
 app.use(notFoundError);
 app.use(generalError);
