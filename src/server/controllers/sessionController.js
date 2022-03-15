@@ -24,13 +24,10 @@ const deleteSession = async (req, res, next) => {
 
 const createSession = async (req, res, next) => {
   try {
-    const { title, date, comment, iFrame } = req.body;
+    const { newSession } = req.body;
 
     const addNewSession = await Session.create({
-      title,
-      date,
-      comment,
-      iFrame,
+      newSession,
     });
     res.status(201);
     res.json(addNewSession);
