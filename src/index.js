@@ -5,7 +5,7 @@ const connectDatabase = require("./database/index");
 const app = require("./server/index");
 
 const port = process.env.PORT || 4000;
-const connectionString = process.env.MONGO_STRING;
+const connectionString = process.env.URI;
 
 (async () => {
   try {

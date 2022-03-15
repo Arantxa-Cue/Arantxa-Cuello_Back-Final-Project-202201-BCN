@@ -1,5 +1,5 @@
-const Session = require("../../database/models/Session");
 require("dotenv").config();
+const Session = require("../../database/models/Session");
 
 const getAllSessions = async (req, res) => {
   const sessions = await Session.find();
@@ -9,9 +9,9 @@ const getAllSessions = async (req, res) => {
 const deleteSession = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const session = await Session.findByIdAndDelete(id);
+    const session = await Session.deleteOne({ id });
     if (session) {
-      res.status(200).json(session);
+      res.status(200).json({});
     } else {
       const error = new Error("Session not found");
       error.code = 404;
