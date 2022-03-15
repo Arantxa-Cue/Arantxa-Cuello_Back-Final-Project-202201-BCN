@@ -1,5 +1,5 @@
 const Session = require("../../database/models/Session");
-const { getAllSessions, deleteSession } = require("./sessionController");
+const { getAllSessions } = require("./sessionController");
 
 jest.mock("../../database/models/Session");
 
@@ -26,7 +26,8 @@ describe("Given an getAllSessions controller", () => {
     });
   });
 });
-describe("Given a deleteSession controller", () => {
+
+/* describe("Given a deleteSession controller", () => {
   describe("When it receives a response with the if of an existing session", () => {
     test("Then it should call method json with the removed session", async () => {
       const idRemovedSession = {
@@ -51,4 +52,4 @@ describe("Given a deleteSession controller", () => {
       expect(res.json).toHaveBeenCalledWith(idRemovedSession);
     });
   });
-});
+}); */
