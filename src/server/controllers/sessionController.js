@@ -22,4 +22,21 @@ const deleteSession = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllSessions, deleteSession };
+const createSession = async (req, res, next) => {
+  try {
+    const { title, date, comment, iFrame } = req.body;
+
+    const addNewSession = await Session.create({
+      title,
+      date,
+      comment,
+      iFrame,
+    });
+    res.status(201);
+    res.json(addNewSession);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllSessions, deleteSession, createSession };
