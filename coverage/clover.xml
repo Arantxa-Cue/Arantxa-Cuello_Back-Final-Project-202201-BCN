@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1647261457485" clover="3.2.0">
-  <project timestamp="1647261457485" name="All files">    
+<coverage generated="1647346712018" clover="3.2.0">
+  <project timestamp="1647346712018" name="All files">
     <metrics statements="39" coveredstatements="35" conditionals="6" coveredconditionals="3" methods="4" coveredmethods="4" elements="49" coveredelements="42" complexity="0" loc="39" ncloc="39" packages="4" files="4" classes="4"/>
     <package name="database.models">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -8,8 +8,9 @@
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>      </file>
+        <line num="25" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+      </file>
     </package>
     <package name="server.controllers">
       <metrics statements="16" coveredstatements="12" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
