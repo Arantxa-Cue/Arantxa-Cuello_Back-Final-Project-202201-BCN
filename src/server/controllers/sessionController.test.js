@@ -1,9 +1,16 @@
 const Session = require("../../database/models/Session");
-const { getAllSessions } = require("./sessionController");
+const {
+  getAllSessions,
+  deleteSession,
+  createSession,
+} = require("./sessionController");
 
 jest.mock("../../database/models/Session");
 
 describe("Given an getAllSessions controller", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
   describe("When it receives a response", () => {
     test("Then it should call method json with a list of sessions of the received response", async () => {
       const res = {
@@ -27,29 +34,60 @@ describe("Given an getAllSessions controller", () => {
   });
 });
 
-/* describe("Given a deleteSession controller", () => {
-  describe("When it receives a response with the if of an existing session", () => {
-    test("Then it should call method json with the removed session", async () => {
-      const idRemovedSession = {
-        id: "22",
-      };
+describe("Given a deleteSession controller", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
 
+  /* describe("When it receives a response with the id to be deleted", () => {
+    test("Then it should call method json with an empty session", async () => {
+      const idSessionToDelete = {
+        id: "2345",
+        title: "morning session",
+        comment: "lovely",
+        audioUrl: "thisisanurl.wev",
+      };
+      const req = {
+        params: { id: "2345" },
+      };
       const res = {
-        status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
 
-      const req = {
-        params: { id: "22" },
-      };
-      const status = 200;
+      const next = jest.fn();
 
-      Session.findByIdAndDelete = jest.fn().mockResolvedValue(idRemovedSession);
+      Session.deleteOne = jest.fn().mockResolvedValue(idSessionToDelete);
 
-      await deleteSession(req, res, null);
+      await deleteSession(req, res, next);
 
-      expect(res.status).toHaveBeenCalledWith(status);
-      expect(res.json).toHaveBeenCalledWith(idRemovedSession);
+      expect(res.json).toHaveBeenCalledWith({ idSessionToDelete });
+      expect(next).not.toHaveBeenCalled();
+    });
+  }); */
+
+  describe("When it receives a response with an id not existing", () => {
+    test("Then it should call next with error messege 'Session not found'", async () => {
+      const req = { params: { id: 20 } };
+      const next = jest.fn();
+      const error = new Error("Session not found");
+
+      Session.findByIdAndDelete = jest.fn().mockRejectedValue(undefined);
+      await deleteSession(req, null, next);
+
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
-}); */
+});
+describe("Given a createSession controller", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+  describe("When it receives a wrong request", () => {
+    test("Then it should call next", async () => {
+      const next = jest.fn();
+
+      await createSession(null, null, next);
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
