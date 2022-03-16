@@ -59,3 +59,23 @@ describe("Given a /delete/:id endpoint", () => {
     });
   });
 });
+
+/* describe("Given a /createsession/ endpoint", () => {
+  describe("When it receives a POST request with a new session data", () => {
+    test("Then it should response a 201 code", async () => {
+      const newSession = {
+        title: "afternoon",
+        comment: "hello",
+        iFrame: "example",
+        date: "2022-03-15T19:32:31.025Z",
+        id: "6230eaa1e5154a6516479422",
+      };
+      const { body } = await request(app)
+        .post("/createsession/")
+        .send(newSession)
+        .expect(201);
+
+      expect(body).toBe(newSession);
+    });
+  });
+}); */

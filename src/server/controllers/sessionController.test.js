@@ -1,5 +1,9 @@
 const Session = require("../../database/models/Session");
-const { getAllSessions, deleteSession } = require("./sessionController");
+const {
+  getAllSessions,
+  deleteSession,
+  createSession,
+} = require("./sessionController");
 
 jest.mock("../../database/models/Session");
 
@@ -71,6 +75,19 @@ describe("Given a deleteSession controller", () => {
       await deleteSession(req, null, next);
 
       expect(next).toHaveBeenCalledWith(error);
+    });
+  });
+});
+describe("Given a createSession controller", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+  describe("When it receives a wrong request", () => {
+    test("Then it should call next", async () => {
+      const next = jest.fn();
+
+      await createSession(null, null, next);
+      expect(next).toHaveBeenCalled();
     });
   });
 });
