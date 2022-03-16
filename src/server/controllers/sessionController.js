@@ -18,6 +18,7 @@ const deleteSession = async (req, res, next) => {
       next(error);
     }
   } catch (error) {
+    error.code = 400;
     next(error);
   }
 };
