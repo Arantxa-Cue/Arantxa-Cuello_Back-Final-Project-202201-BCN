@@ -1,5 +1,8 @@
 require("dotenv").config();
+const debug = require("debug")("mindfulness:server");
+const chalk = require("chalk");
 const Session = require("../../database/models/Session");
+const notFoundError = require("../middlewares/errors");
 
 const getAllSessions = async (req, res) => {
   const sessions = await Session.find();
@@ -36,4 +39,25 @@ const createSession = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllSessions, deleteSession, createSession };
+const detailSession = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const session = await Session.findById(id);
+    if (session) {
+      debug(chalk.green("Session ok"));
+      res.json({ session });
+    } else {
+      debug(chalk.red("Session not found"));
+      next(notFoundError);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  getAllSessions,
+  deleteSession,
+  createSession,
+  detailSession,
+};
