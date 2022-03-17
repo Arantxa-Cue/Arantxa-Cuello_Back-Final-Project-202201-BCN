@@ -6,6 +6,7 @@ const {
   getAllSessions,
   deleteSession,
   createSession,
+  detailSession,
 } = require("../controllers/sessionController");
 const validationSessionJoi = require("../controllers/sessionValidator");
 
@@ -19,5 +20,6 @@ router.post(
   validate(validationSessionJoi),
   createSession
 );
+router.put("/:id", detailSession);
 
 module.exports = router;
