@@ -45,7 +45,7 @@ const detailSession = async (req, res, next) => {
     const session = await Session.findById(id);
     if (session) {
       debug(chalk.green("Session ok"));
-      res.json({ session });
+      res.json(session);
     } else {
       debug(chalk.red("Session not found"));
       next(notFoundError);
