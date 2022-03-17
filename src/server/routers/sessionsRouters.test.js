@@ -60,22 +60,38 @@ describe("Given a /delete/:id endpoint", () => {
   });
 });
 
-/* describe("Given a /createsession/ endpoint", () => {
+describe("Given a /create/ endpoint", () => {
   describe("When it receives a POST request with a new session data", () => {
-    test("Then it should response a 201 code", async () => {
+    test("Then it should respond with 201 code and the new session", async () => {
       const newSession = {
         title: "afternoon",
         comment: "hello",
         iFrame: "example",
         date: "2022-03-15T19:32:31.025Z",
-        id: "6230eaa1e5154a6516479422",
+        // id: "6230eaa1e5154a6516479422",
       };
       const { body } = await request(app)
-        .post("/createsession/")
+        .post("/create")
         .send(newSession)
         .expect(201);
 
-      expect(body).toBe(newSession);
+      expect(body.title).toBe(newSession.title);
     });
   });
-}); */
+});
+describe("Given an /create/ endpoint", () => {
+  describe("When it receives a POST request with invalid date", () => {
+    test("Then it should respond with a code 500 and the error message", async () => {
+      const newSession = { title: "hello", date: "today" };
+      const expectedError = "Internal server error!";
+
+      const { body } = await request(app)
+        .post("/create")
+        .send(newSession)
+        .expect(500);
+
+      expect(body.error).toBe(true);
+      expect(body.message).toBe(expectedError);
+    });
+  });
+});

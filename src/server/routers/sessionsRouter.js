@@ -13,6 +13,11 @@ const router = express.Router();
 
 router.get("/allsessions", getAllSessions);
 router.delete("/delete/:id", deleteSession);
-router.post("/create", validate(validationSessionJoi), createSession);
+router.post(
+  "/create",
+
+  validate(validationSessionJoi),
+  createSession
+);
 
 module.exports = router;

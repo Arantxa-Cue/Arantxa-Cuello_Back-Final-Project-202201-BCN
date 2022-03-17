@@ -9,7 +9,8 @@ const getAllSessions = async (req, res) => {
 const deleteSession = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const session = await Session.deleteOne({ id });
+    const session = await Session.findByIdAndDelete(id);
+
     if (session) {
       res.status(200).json({});
     } else {
@@ -25,11 +26,9 @@ const deleteSession = async (req, res, next) => {
 
 const createSession = async (req, res, next) => {
   try {
-    const { newSession } = req.body;
+    const newSession = req.body;
 
-    const addNewSession = await Session.create({
-      newSession,
-    });
+    const addNewSession = await Session.create(newSession);
     res.status(201);
     res.json(addNewSession);
   } catch (error) {
