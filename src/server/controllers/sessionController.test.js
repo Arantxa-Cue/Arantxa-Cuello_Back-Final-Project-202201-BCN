@@ -111,12 +111,4 @@ describe("Given a detailSession controller", () => {
       expect(res.json).toHaveBeenCalled();
     });
   });
-  describe("When it receives a wrong request", () => {
-    test("Then it should call next", async () => {
-      const next = jest.fn();
-
-      await detailSession(null, null, next);
-      expect(next).toHaveBeenCalled();
-    });
-  });
 });
