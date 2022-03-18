@@ -3,6 +3,7 @@ const {
   getAllSessions,
   deleteSession,
   createSession,
+  detailSession,
 } = require("./sessionController");
 
 jest.mock("../../database/models/Session");
@@ -83,6 +84,38 @@ describe("Given a createSession controller", () => {
       const next = jest.fn();
 
       await createSession(null, null, next);
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+describe("Given a detailSession controller", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+  describe("When it receives a response with an id", () => {
+    test("Then it should method json with the session", async () => {
+      const expectedSessionToFind = {
+        id: "2345",
+      };
+      const req = {
+        params: { id: "2345" },
+      };
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+      Session.findById = jest.fn().mockResolvedValue(expectedSessionToFind);
+
+      await detailSession(req, res, next);
+
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+  describe("When it receives a wrong request", () => {
+    test("Then it should call next", async () => {
+      const next = jest.fn();
+
+      await detailSession(null, null, next);
       expect(next).toHaveBeenCalled();
     });
   });
