@@ -20,6 +20,6 @@ router.post(
   validate(validationSessionJoi),
   createSession
 );
-router.get("/:id", detailSession);
+router.get("/allsessions/session/:id", detailSession);
 
 module.exports = router;
