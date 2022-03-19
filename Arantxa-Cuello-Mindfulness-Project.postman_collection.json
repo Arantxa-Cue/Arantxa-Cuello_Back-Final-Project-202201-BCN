@@ -38,7 +38,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"title\": \"ejemplo\",\r\n    \"date\":\"2022-03-15T19:32:31.025Z\",\r\n    \"comment\":\"blabla\",\r\n    \"iFrame\":\"ejemplo\"\r\n}",
+          "raw": "{\r\n    \"title\": \"ejemplo7\",\r\n  \r\n    \"comment\":\"blabla\",\r\n    \"iFrame\":\"ejemplo\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -55,8 +55,11 @@
     },
     {
       "name": "id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
       "request": {
-        "method": "PUT",
+        "method": "GET",
         "header": [],
         "body": {
           "mode": "raw",
@@ -68,9 +71,22 @@
           }
         },
         "url": {
-          "raw": "{{origin}}/62339af2b3737ce29f024920",
+          "raw": "{{origin}}/allsessions/session/62332134e3b7b5bc827f58e0",
           "host": ["{{origin}}"],
-          "path": ["62339af2b3737ce29f024920"]
+          "path": ["allsessions", "session", "62332134e3b7b5bc827f58e0"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "edit",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}/edit/session/",
+          "host": ["{{origin}}"],
+          "path": ["edit", "session", ""]
         }
       },
       "response": []
