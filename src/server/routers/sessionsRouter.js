@@ -7,6 +7,7 @@ const {
   deleteSession,
   createSession,
   detailSession,
+  updateSession,
 } = require("../controllers/sessionController");
 const validationSessionJoi = require("../controllers/sessionValidator");
 
@@ -21,5 +22,6 @@ router.post(
   createSession
 );
 router.get("/allsessions/session/:id", detailSession);
+router.put("/edit/session/:id", updateSession);
 
 module.exports = router;
