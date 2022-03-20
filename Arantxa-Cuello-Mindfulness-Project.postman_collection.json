@@ -83,10 +83,91 @@
       "request": {
         "method": "PUT",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"ejemplo5-update\",\r\n    \"date\": \"2022-03-15T19:32:31.025Z\",\r\n    \"comment\": \"blabla\",\r\n    \"iFrame\": \"ejemplo\",\r\n    \"id\": \"62332134e3b7b5bc827f58e0\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
-          "raw": "{{origin}}/edit/session/",
+          "raw": "{{origin}}/edit/session/62332134e3b7b5bc827f58e0",
           "host": ["{{origin}}"],
-          "path": ["edit", "session", ""]
+          "path": ["edit", "session", "62332134e3b7b5bc827f58e0"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "register",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIifQ.H1-6lhNCSg_FGIe_hNRdLjp1AeAtwEj0ZGE90QE5L7s",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIifQ.H1-6lhNCSg_FGIe_hNRdLjp1AeAtwEj0ZGE90QE5L7s",
+            "value": "",
+            "description": "BEARER",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"Pepe\",\r\n    \"name\": \"Pepe\",\r\n    \"password\": \"1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}/users/register",
+          "host": ["{{origin}}"],
+          "path": ["users", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIifQ.H1-6lhNCSg_FGIe_hNRdLjp1AeAtwEj0ZGE90QE5L7s",
+            "value": "",
+            "description": "BEARER",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"Pepe\",\r\n    \"password\": \"1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}/users/login",
+          "host": ["{{origin}}"],
+          "path": ["users", "login"]
         }
       },
       "response": []
