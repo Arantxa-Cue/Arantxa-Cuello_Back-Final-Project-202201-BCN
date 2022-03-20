@@ -14,6 +14,9 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  id: {
+    type: String,
+  },
   sessions: [
     {
       type: Schema.Types.ObjectId,
