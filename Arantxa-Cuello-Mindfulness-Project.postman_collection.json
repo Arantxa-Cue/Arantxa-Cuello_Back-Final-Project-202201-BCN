@@ -171,6 +171,42 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "profile",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIifQ.H1-6lhNCSg_FGIe_hNRdLjp1AeAtwEj0ZGE90QE5L7s",
+            "value": "",
+            "description": "BEARER",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}/users/profile/62374b8bc862fb1fddf349bb",
+          "host": ["{{origin}}"],
+          "path": ["users", "profile", "62374b8bc862fb1fddf349bb"]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
