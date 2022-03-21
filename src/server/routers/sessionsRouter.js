@@ -10,18 +10,20 @@ const {
   updateSession,
 } = require("../controllers/sessionController");
 const validationSessionJoi = require("../controllers/sessionValidator");
+const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
 router.get("/allsessions", getAllSessions);
-router.delete("/delete/:id", deleteSession);
+router.delete("/delete/:id", auth, deleteSession);
 router.post(
   "/create",
+  auth,
 
   validate(validationSessionJoi),
   createSession
 );
 router.get("/allsessions/session/:id", detailSession);
-router.put("/edit/session/:id", updateSession);
+router.put("/edit/session/:id", auth, updateSession);
 
 module.exports = router;
