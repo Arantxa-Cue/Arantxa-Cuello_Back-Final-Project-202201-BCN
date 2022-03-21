@@ -56,14 +56,13 @@ const registerUser = async (req, res, next) => {
   }
 };
 
-const getProfile = async (req, res, next) => {
-  const { id } = req.params;
+const getUserSessions = async (req, res, next) => {
   try {
-    const profile = await User.findById(id);
-    if (profile) {
-      res.json(profile);
+    const sessions = await User.find();
+    if (sessions) {
+      res.json({ sessions });
     } else {
-      const error = new Error("Profile not found");
+      const error = new Error("Sessions not found");
       error.code = 400;
       next(error);
     }
@@ -73,4 +72,4 @@ const getProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { loginUser, registerUser, getProfile };
+module.exports = { loginUser, registerUser, getUserSessions };
