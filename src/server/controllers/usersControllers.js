@@ -57,10 +57,11 @@ const registerUser = async (req, res, next) => {
 };
 
 const getUserSessions = async (req, res, next) => {
+  const { id } = req.params;
   try {
-    const sessions = await User.find();
+    const sessions = await User.findById(id).populate("sessions");
     if (sessions) {
-      res.json({ sessions });
+      res.json(sessions.sessions);
     } else {
       const error = new Error("Sessions not found");
       error.code = 400;

@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post("/login", loginUser);
 router.post("/register", registerUser);
-router.get("/profile/user", getUserSessions);
+router.get("/profile/:id", getUserSessions);
 
 module.exports = router;
