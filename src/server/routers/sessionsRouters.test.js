@@ -41,7 +41,7 @@ beforeEach(async () => {
 
   const { body } = await request(app).post("/users/login").send({
     username: "arantxa",
-    password: "arantxa",
+    password: "123",
   });
   userToken = body.token;
 });
