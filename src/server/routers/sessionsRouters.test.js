@@ -7,6 +7,7 @@ const app = require("..");
 const connectToDB = require("../../database/index");
 
 const Session = require("../../database/models/Session");
+const User = require("../../database/models/User");
 
 const id = ObjectId();
 
@@ -20,21 +21,34 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  const arantxa = await User.create({
+    name: "arantxa",
+    username: "arantxa",
+    password: "$2b$10$xGTIAjtkYytiIwOeygNDUelnkFBp3pLHY3YPLDkPY2.nEOTxHKv/W",
+  });
   await Session.create({
     title: "morning",
     comment: "hello",
     iFrame: "audiostring",
-    _id: id,
+    user: arantxa.id,
   });
   await Session.create({
     title: "afternoon",
     comment: "hello",
     iFrame: "audiostring",
+    user: arantxa.id,
   });
+
+  const { body } = await request(app).post("/users/login").send({
+    username: "arantxa",
+    password: "arantxa",
+  });
+  userToken = body.token;
 });
 
 afterEach(async () => {
   await Session.deleteMany({});
+  await User.deleteMany({});
 });
 
 afterAll(() => {
