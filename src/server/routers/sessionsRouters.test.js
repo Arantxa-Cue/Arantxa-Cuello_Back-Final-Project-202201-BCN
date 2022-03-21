@@ -11,6 +11,7 @@ const Session = require("../../database/models/Session");
 const id = ObjectId();
 
 let mongoServer;
+let userToken;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
@@ -55,7 +56,10 @@ describe("Given an /allsessions/ endpoint", () => {
 describe("Given a /delete/:id endpoint", () => {
   describe("When it receives a DELETE request", () => {
     test("Then it should response a 200 code", async () => {
-      await request(app).delete(`/delete/${id}`).expect(200);
+      await request(app)
+        .delete(`/delete/${id}`)
+        .set("Authorization", `Bearer ${userToken}`)
+        .expect(200);
     });
   });
 });
@@ -72,6 +76,7 @@ describe("Given a /create/ endpoint", () => {
       };
       const { body } = await request(app)
         .post("/create")
+        .set("Authorization", `Bearer ${userToken}`)
         .send(newSession)
         .expect(201);
 
@@ -87,6 +92,7 @@ describe("Given an /create/ endpoint", () => {
 
       const { body } = await request(app)
         .post("/create")
+        .set("Authorization", `Bearer ${userToken}`)
         .send(newSession)
         .expect(500);
 
