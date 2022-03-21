@@ -173,7 +173,7 @@
       "response": []
     },
     {
-      "name": "profile",
+      "name": "{{origin}}/users/profile/6238392ba099a2048aec8966",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -184,9 +184,8 @@
         "method": "GET",
         "header": [
           {
-            "key": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIifQ.H1-6lhNCSg_FGIe_hNRdLjp1AeAtwEj0ZGE90QE5L7s",
-            "value": "",
-            "description": "BEARER",
+            "key": "Content-Type",
+            "value": "application/json",
             "type": "text",
             "disabled": true
           }
@@ -201,9 +200,9 @@
           }
         },
         "url": {
-          "raw": "{{origin}}/users/profile/62374b8bc862fb1fddf349bb",
+          "raw": "{{origin}}/users/profile/6238392ba099a2048aec8966",
           "host": ["{{origin}}"],
-          "path": ["users", "profile", "62374b8bc862fb1fddf349bb"]
+          "path": ["users", "profile", "6238392ba099a2048aec8966"]
         }
       },
       "response": []
