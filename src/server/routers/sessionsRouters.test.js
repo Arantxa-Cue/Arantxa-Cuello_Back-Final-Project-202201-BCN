@@ -64,36 +64,7 @@ describe("Given an /allsessions/ endpoint", () => {
     });
   });
 });
-describe("Given a /delete/:id endpoint", () => {
-  describe("When it receives a DELETE request", () => {
-    test("Then it should response a 200 code", async () => {
-      const idSession = "6238e3b2faef7f82d15a715b";
-      await request(app)
-        .delete(`/delete/${idSession}`)
-        .set("Authorization", `Bearer ${userToken}`)
-        .expect(200);
-    });
-  });
-});
 
-describe("Given a /create/ endpoint", () => {
-  describe("When it receives a POST request with a new session data", () => {
-    test("Then it should respond with 201 code ", async () => {
-      const newSession = {
-        title: "afternoon",
-        comment: "hello",
-        iFrame: "example",
-        date: "2022-03-15T19:32:31.025Z",
-        // id: "6230eaa1e5154a6516479422",
-      };
-      await request(app)
-        .post("/create")
-        .set("Authorization", `Bearer ${userToken}`)
-        .send(newSession)
-        .expect(201);
-    });
-  });
-});
 describe("Given an /create/ endpoint", () => {
   describe("When it receives a POST request with invalid date", () => {
     test("Then it should respond with a code 500 and the error message", async () => {
