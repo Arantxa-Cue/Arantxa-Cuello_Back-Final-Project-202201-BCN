@@ -1,4 +1,5 @@
 require("dotenv").config();
+// const jwtDecode = require( "jwt-decode");
 const jwt = require("jsonwebtoken");
 const debug = require("debug")("mindfulness:server:middlewares:auth");
 
@@ -19,6 +20,8 @@ const auth = async (req, res, next) => {
         res.status(401);
         next(error);
       } else {
+        const userInfo = jwt.verify(userToken, process.env.JWT_SECRET);
+        req.userId = userInfo.id;
         next();
       }
     } catch (error) {
