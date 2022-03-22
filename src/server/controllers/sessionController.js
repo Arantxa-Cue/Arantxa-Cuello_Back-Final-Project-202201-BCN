@@ -2,6 +2,7 @@ require("dotenv").config();
 const debug = require("debug")("mindfulness:server");
 const chalk = require("chalk");
 const Session = require("../../database/models/Session");
+const User = require("../../database/models/User");
 const notFoundError = require("../middlewares/errors");
 
 const getAllSessions = async (req, res) => {
@@ -32,6 +33,11 @@ const createSession = async (req, res, next) => {
     const newSession = req.body;
 
     const addNewSession = await Session.create(newSession);
+
+    const user = await User.findById(req.userId);
+    user.sessions.push(addNewSession.id);
+    user.save();
+
     res.status(201);
     res.json(addNewSession);
   } catch (error) {
