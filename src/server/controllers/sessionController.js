@@ -23,6 +23,7 @@ const deleteSession = async (req, res, next) => {
       next(error);
     }
   } catch (error) {
+    error.message = new Error("Session not deleted");
     error.code = 400;
     next(error);
   }
