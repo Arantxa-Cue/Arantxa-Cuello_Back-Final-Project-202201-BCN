@@ -4,6 +4,7 @@ const {
   deleteSession,
   createSession,
   detailSession,
+  updateSession,
 } = require("./sessionController");
 
 jest.mock("../../database/models/Session");
@@ -74,7 +75,24 @@ describe("Given a deleteSession controller", () => {
       expect(next).toHaveBeenCalledWith(error);
     });
   });
+  describe("When it receives a response with id of a session and database not connected", () => {
+    test("Then it should call next error .", async () => {
+      const req = {
+        params: {
+          id: "35",
+        },
+      };
+      const next = jest.fn();
+      const error = new Error("Session not deleted");
+
+      Session.findByIdAndDelete = jest.fn().mockRejectedValue(error);
+      await deleteSession(req, null, next);
+
+      expect(next).toHaveBeenCalledWith(error);
+    });
+  });
 });
+
 describe("Given a createSession controller", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -109,6 +127,80 @@ describe("Given a detailSession controller", () => {
       await detailSession(req, res, next);
 
       expect(res.json).toHaveBeenCalled();
+    });
+  });
+  describe("When it receives a response with a wrong id", () => {
+    test("Then it should call next with an error", async () => {
+      const req = {
+        params: { id: "2345" },
+      };
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+      Session.findById = jest.fn().mockResolvedValue(null);
+
+      await detailSession(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+describe("Given a updateSession controller", () => {
+  describe("When it receives a response with session id 23 ", () => {
+    test("Then it should call method json with the updated session", async () => {
+      const sessionToUpdate = {
+        id: "23",
+        text: "Hello!",
+      };
+      const req = {
+        params: { id: sessionToUpdate.id },
+        body: sessionToUpdate,
+      };
+      const expectedUpdatedMessage = sessionToUpdate;
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      Session.findByIdAndUpdate = jest
+        .fn()
+        .mockResolvedValue(expectedUpdatedMessage);
+
+      await updateSession(req, res, null);
+
+      expect(res.json).toHaveBeenCalledWith(sessionToUpdate);
+    });
+  });
+
+  describe("When it receives a response with id of not existing session", () => {
+    test("Then it should call next with error message 'Session not found'", async () => {
+      const req = {
+        params: {
+          id: "33",
+        },
+      };
+      const next = jest.fn();
+      const error = new Error("Session not found");
+
+      Session.findByIdAndUpdate = jest.fn().mockResolvedValue(undefined);
+      await updateSession(req, null, next);
+
+      expect(next).toHaveBeenCalledWith(error);
+    });
+  });
+
+  describe("When it receives a response with id of a session and database not connected", () => {
+    test("Then it should call next error message 'Couldn't update session'", async () => {
+      const req = {
+        params: {
+          id: "35",
+        },
+      };
+      const next = jest.fn();
+      const error = new Error("Couldn't update session");
+
+      Session.findByIdAndUpdate = jest.fn().mockRejectedValue(error);
+      await updateSession(req, null, next);
+
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 });
