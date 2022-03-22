@@ -129,6 +129,22 @@ describe("Given a detailSession controller", () => {
       expect(res.json).toHaveBeenCalled();
     });
   });
+  describe("When it receives a response with a wrong id", () => {
+    test("Then it should call next with an error", async () => {
+      const req = {
+        params: { id: "2345" },
+      };
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+      Session.findById = jest.fn().mockResolvedValue(null);
+
+      await detailSession(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
 });
 describe("Given a updateSession controller", () => {
   describe("When it receives a response with session id 23 ", () => {

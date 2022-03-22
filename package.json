@@ -58,7 +58,7 @@
       "!src/database/index.js",
       "!src/**/*.test.js",
       "!src/server/index.js",
-      "!src/getUser.js "
+      "!src/server/utils/getUser.js"
     ]
   }
 }
