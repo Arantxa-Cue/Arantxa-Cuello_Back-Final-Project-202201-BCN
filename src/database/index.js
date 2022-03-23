@@ -5,7 +5,6 @@ const chalk = require("chalk");
 
 const connectDatabase = (connectionString) =>
   new Promise((resolve, reject) => {
-    // mongoose.set("debug", true);
     mongoose.set("toJSON", {
       virtuals: true,
       transform: (doc, ret) => {
