@@ -1,5 +1,4 @@
 require("dotenv").config();
-// const jwtDecode = require( "jwt-decode");
 const jwt = require("jsonwebtoken");
 const debug = require("debug")("mindfulness:server:middlewares:auth");
 
