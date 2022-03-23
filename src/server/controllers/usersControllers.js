@@ -35,7 +35,7 @@ const registerUser = async (req, res, next) => {
   const user = await User.findOne({ username });
   if (!username || !password || user) {
     const errorWPW = new Error(
-      chalk.redBright(`Oops..! Something went wrong.`)
+      chalk.redBright("Oops..! Something went wrong.")
     );
     errorWPW.code = 400;
     return next(errorWPW);

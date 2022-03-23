@@ -1,40 +1,16 @@
 const bcrypt = require("bcrypt");
-const { default: mongoose } = require("mongoose");
 
 const jsonwebtoken = require("jsonwebtoken");
-const { MongoMemoryServer } = require("mongodb-memory-server");
+const chalk = require("chalk");
 const User = require("../../database/models/User");
-const { loginUser, registerUser } = require("./usersControllers");
-const connectDB = require("../../database");
+const {
+  loginUser,
+  registerUser,
+  getUserSessions,
+} = require("./usersControllers");
 
-jest.mock("jsonwebtoken", () => ({
-  ...jest.requireActual("jsonwebtoken"),
-  sign: jest.fn().mockReturnValue("token"),
-}));
-
-let server;
-beforeAll(async () => {
-  server = await MongoMemoryServer.create();
-  const uri = server.getUri();
-  connectDB(uri);
-});
-
-beforeEach(async () => {
-  const cryptPassword = await bcrypt.hash("1234", 10);
-  await User.create({
-    name: "leo",
-    username: "leo",
-    password: cryptPassword,
-  });
-});
-
-afterEach(async () => {
-  await User.deleteMany({});
-});
-
-afterAll(async () => {
-  await mongoose.connection.close();
-  await server.stop();
+beforeEach(() => {
+  jest.resetAllMocks();
 });
 
 describe("Given a loginUser controller", () => {
@@ -94,10 +70,12 @@ describe("Given a loginUser controller", () => {
       const next = jest.fn();
 
       User.findOne = jest.fn().mockResolvedValue(null);
+      const error = new Error(chalk.redBright("Credentials are not correct"));
+      error.code = 401;
 
       await loginUser(req, null, next);
 
-      expect(next).toHaveBeenCalled();
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 });
@@ -135,20 +113,49 @@ describe("Given a user register controller", () => {
       });
     });
   });
-  describe("When error ocsurs", () => {
-    test("Then the method next should be called", async () => {
-      const user = {
-        name: "leo",
-        username: "leoo",
-        password: 1234,
+  describe("When it receives a non existing user", () => {
+    test("Then the method next should be called with error", async () => {
+      const req = {
+        body: {
+          name: "",
+          username: "",
+          password: 1234,
+        },
       };
-      const res = null;
-      const req = { body: user };
+      const res = {};
       const next = jest.fn();
+      User.findOne = jest.fn().mockResolvedValue(false);
+      const error = new Error("Oops..! Something went wrong.");
+      error.code = 400;
 
       await registerUser(req, res, next);
-
+      expect(User.findOne).toHaveBeenCalled();
       expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a getUserSessions controller", () => {
+  describe("When it receives an id", () => {
+    test("Then it should call method jason with the users session", async () => {
+      const req = {
+        params: {
+          id: "33",
+        },
+      };
+      const expectedSessionToFind = {
+        id: "33",
+      };
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+      User.findById = jest.fn().mockReturnThis();
+
+      User.populate = jest.fn().mockResolvedValue(expectedSessionToFind);
+      await getUserSessions(req, res, next);
+
+      expect(res.json).toHaveBeenCalled();
     });
   });
 });
